@@ -20,12 +20,15 @@ class FeatureSelector extends Component {
     })
     return (
       <div> 
+        Is their 
         <select onChange={this.onFeatureSelectChange}> 
           {featureOptions}
         </select>
         <select onChange={this.onValueSelectChange}> 
           {valueOptions}
         </select>
+        ?
+        {this.props.reply}
       </div>
     )
   }

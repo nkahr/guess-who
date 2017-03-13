@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import classNames from 'classnames'
 
 class Person extends Component {
 
@@ -10,8 +11,12 @@ class Person extends Component {
 
   render() {
     return (
-      <div> 
-        <p>I'm a person </p>
+      <div className={classNames({
+        person: true, 
+        removed: this.props.person.removed,
+      })}> 
+        <p>Name: {this.props.person.name} </p>
+        <p>Hair Colour: {this.props.person.hairColour} </p>
       </div>
     )
   }

@@ -8,6 +8,10 @@ class PeopleData {
         hairColour: "blue"
       }), 
       new Person({
+        name: "Nigel", 
+        hairColour: "blond"
+      }), 
+      new Person({
         name: "Laura", 
         hairColour: "brown"
       })

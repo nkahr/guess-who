@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import Person from './Person'
 
 class PersonList extends Component {
 
@@ -10,10 +11,10 @@ class PersonList extends Component {
 
   render() {
     const peopleNodes = this.props.peopleData.map((person, index) => {
-      return <p key={index}>{person.name}, {person.hairColour}</p>
+      return <Person key={index} person={person}> </Person>
     })
     return (
-      <div> 
+      <div className="grid"> 
         {peopleNodes}
       </div>
     )

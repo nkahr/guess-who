@@ -1,0 +1,25 @@
+html, body{
+    width:50%; 
+    width:50%; 
+    margin:0; 
+    padding:0;
+}
+
+.grid {
+    width:100%; 
+    height:100%;
+}
+.person{ 
+    border:1px solid #000;         
+    padding-bottom: 30%; 
+    height: 0;
+    width:30%; 
+    text-align: center;
+    margin:1%; 
+    float:left; 
+    display:block;
+}
+
+.person.removed {
+    background-color: grey;
+}

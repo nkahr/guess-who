@@ -2,6 +2,9 @@ import React, {Component} from 'react'
 import PeopleData from '../seeds'
 import PersonList from '../components/PersonList'
 import FeatureSelector from '../components/FeatureSelector'
+import GameFunctions from '../models/GameFunctions'
+
+let Functions = new GameFunctions()
 
 class GuessWhoContainer extends Component {
 
@@ -10,8 +13,9 @@ class GuessWhoContainer extends Component {
     const pplData = new PeopleData();
     this.state = {
       data: pplData.seeds, 
-      selectedFeature: undefined, 
-      selectedValue: undefined
+      selectedFeature: Object.keys(pplData.seeds[0])[0], 
+      selectedValue: undefined, 
+      selectedPersonIndex: Math.floor(Math.random() * PeopleData.length)
     }
     this.onFeatureChange = this.onFeatureChange.bind(this)
     this.onValueChange = this.onValueChange.bind(this)
@@ -30,10 +34,11 @@ class GuessWhoContainer extends Component {
           features={Object.keys(this.state.data[0])} 
           values={values}
           onFeatureChange={this.onFeatureChange} 
-          onValueChange={this.onValueChange}/>
+          onValueChange={this.onValueChange}
+          reply={this.state.reply}/>
         <PersonList 
           peopleData={this.state.data} 
-          selectedPerson={Math.floor(Math.random() * PeopleData.length)}/>
+          selectedPersonIndex={this.state.selectedPerson}/>
       </div>
     )
   }
@@ -43,7 +48,18 @@ class GuessWhoContainer extends Component {
   }
 
   onValueChange(value) {
-    this.setState({selectedValue: value})
+    let reply;
+    let selectedPerson = this.state.data[this.state.selectedPersonIndex];
+    if (selectedPerson[this.state.selectedFeature] === value) {
+      reply = " Yes!";
+      Functions.removePeopleWithoutFeature(this.state.data, this.state.selectedFeature, value)
+    } else {
+      reply = " Nope";
+      Functions.removePeopleWithFeature(this.state.data, this.state.selectedFeature, value)
+    }
+
+    this.setState({selectedValue: value, reply: reply});
+
   }
 
   findUniqueValues() {
